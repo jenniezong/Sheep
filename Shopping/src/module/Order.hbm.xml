@@ -1,12 +1,25 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-1-18 11:11:47 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2015-1-18 22:38:54 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="module.Order" table="ORDER">
-        <id name="id" type="java.lang.Long">
+        <id name="id" type="int">
             <column name="ID" />
             <generator class="assigned" />
         </id>
+        <list name="items" inverse="false" table="ITEM" lazy="true">
+            <key>
+                <column name="ID" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="module.Item" />
+        </list>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="price" type="double">
+            <column name="PRICE" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -1,25 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-1-18 11:11:47 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2015-1-18 22:38:54 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="module.User" table="USER">
-        <id name="name" type="java.lang.String" access="field">
-            <column name="NAME" />
+        <id name="id" type="int" access="field">
+            <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="password" type="java.lang.String" access="field">
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="password" type="java.lang.String">
             <column name="PASSWORD" />
         </property>
-        <property name="level" access="field">
+        <property name="level" type="int">
             <column name="LEVEL" />
-            <type name="org.hibernate.type.EnumType">
-                <param name="type">12</param>
-                <param name="enumClass">module.CustmerLevel</param>
-            </type>
         </property>
-        <many-to-one name="cart" class="module.Cart" access="field" fetch="join">
-            <column name="CART" />
+        <many-to-one name="cart" class="module.Cart" fetch="join">
+            <column name="CART_ID" />
         </many-to-one>
     </class>
 </hibernate-mapping>
