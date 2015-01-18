@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-1-18 11:11:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="module.Item" table="ITEM">
+        <id name="id" type="int" access="field">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="java.lang.String" access="field">
+            <column name="NAME" />
+        </property>
+        <property name="price" type="double" access="field">
+            <column name="PRICE" />
+        </property>
+        <property name="discount" type="float" access="field">
+            <column name="DISCOUNT" />
+        </property>
+        <property name="quantity" type="int" access="field">
+            <column name="QUANTITY" />
+        </property>
+    </class>
+</hibernate-mapping>
