@@ -17,7 +17,7 @@
         <property name="level" type="int">
             <column name="LEVEL" />
         </property>
-        <many-to-one name="cart" class="module.Cart" fetch="join">
+        <many-to-one name="cart" class="module.Cart" fetch="join" unique="true">
             <column name="CART_ID" />
         </many-to-one>
     </class>

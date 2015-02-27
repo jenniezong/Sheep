@@ -4,3 +4,4 @@
 *.classpath
 *webContent*
 *.class
+*bin*
