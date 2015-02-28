@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-1-18 22:38:54 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="module.User" table="USER">
+    <class name="module.User" table="user">
         <id name="id" type="int" access="field">
             <column name="ID" />
             <generator class="assigned" />

@@ -4,9 +4,9 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
-		<property name="hibernate.connection.password">root</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost/shopping</property>
-		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">2002137305</property>
+		<property name="hibernate.connection.url">jdbc:mysql://147.128.114.136/shopping</property>
+		<property name="hibernate.connection.username">nan</property>
 		<property name="hibernate.default_schema">shopping</property>
 		<!-- SQL dialect -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>

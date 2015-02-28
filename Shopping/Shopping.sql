@@ -1,8 +1,12 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
---
--- Host: localhost    Database: shopping
--- ------------------------------------------------------
--- Server version	5.5.41-log
+DROP USER `nan`;
+GRANT ALL PRIVILEGES ON *.* TO 'nan'@'%' IDENTIFIED BY '2002137305' WITH GRANT OPTION;
+
+DROP DATABASE IF EXISTS `shopping`;
+CREATE DATABASE `shopping`;
+
+grant all privileges on shopping.* to nan@'%';
+
+use shopping;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -75,3 +79,5 @@ CREATE TABLE `user` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2015-01-18 13:55:31
+
+commit;
