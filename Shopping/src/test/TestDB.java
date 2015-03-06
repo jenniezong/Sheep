@@ -19,6 +19,7 @@ public class TestDB {
 				.buildSessionFactory();
 		User user = new User("nan", "nan");
 		addUser(user);
+		sf.close();
 
 	}
 
