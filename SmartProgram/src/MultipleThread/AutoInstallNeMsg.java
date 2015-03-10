@@ -1,4 +1,4 @@
-package test;
+package MultipleThread;
 
 import java.util.Date;
 
@@ -8,13 +8,10 @@ public class AutoInstallNeMsg {
 	private String emName = "";
 	private Date time;
 	private static AutoInstallNeMsg autoInstallNeMsg = new AutoInstallNeMsg();
-	private Boolean flag = false;
-	private Thread notifyThread;
 	private Thread waitThread;
 
 	private AutoInstallNeMsg() {
 		initData();
-//		autoUpdateMsg();
 	}
 
 	public static AutoInstallNeMsg getInstance() {
@@ -50,8 +47,8 @@ public class AutoInstallNeMsg {
 		}
 		this.emName = em;
 		this.time = time;
-		System.out.println("updateMag!!!!!!!!!!");
-		autoUpdateMsg();
+		System.out.println("Auto init data start!!!!!!!!!!");
+		autoInitData();
 
 	}
 
@@ -59,51 +56,32 @@ public class AutoInstallNeMsg {
 		String[] subStr = details.split(":");
 		return subStr[3];
 	}
+	
 
-	private void autoUpdateMsg() {
+	private void autoInitData() {
+		
+		if(waitThread != null )
+		{
+			waitThread.interrupt();
+			
+		}
 		
 		waitThread = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				synchronized(flag) {
 					try {
-						Thread.sleep(30 * 100);
-						System.out.println("notify!!!!!!!!!!!");
-						flag.notifyAll();
+						Thread.sleep(2 * 1000);
+						initData();
+						System.out.println("Init data completed!");
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 				}
-			}
+				
 		});
 		waitThread.start();
-		
-		notifyThread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				synchronized (flag) {
-					try {
-						initData();
-						System.out.println("wait!!!!!!!!!!!");
-						flag.wait();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}
-			}
-		});
-		notifyThread.start();
-
-		
-		
-		
-		
 		
 	}
 }
