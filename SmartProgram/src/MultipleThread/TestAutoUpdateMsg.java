@@ -6,6 +6,8 @@ import java.util.Random;
 
 
 /**
+ * Requirment:
+ * 
  * There are three thread.
  * 1 thread is prepared to update the number.
  * one thread is used to print the message.
