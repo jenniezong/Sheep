@@ -2,6 +2,11 @@ package designPattern.factoryMethod;
 
 public class SendFactory {
 
+	/**
+	 * 普通工厂模式
+	 * @param type
+	 * @return
+	 */
 	public Sender produce(String type) {
 		
 		
@@ -19,5 +24,31 @@ public class SendFactory {
 			return null;
 		}
 	}
+	
+	/**
+	 * 多个工厂方法模式
+	 * @return
+	 */
+	public Sender produceMail() {
+		return new MailSender();
+	}
+	
+	public Sender produceSms() {
+		return new SmsSender();
+	}
+	
+	
+	/**
+	 * 静态工厂方法模式
+	 * @return
+	 */
+	public static Sender produceMail1() {
+		return new MailSender();
+	}
+	
+	public static Sender produceSms1() {
+		return new SmsSender();
+	}
+	
 
 }
