@@ -3,7 +3,7 @@ package designPattern.factoryMethod;
 public class SendFactory {
 
 	/**
-	 * 普通工厂模式
+	 * 普通工厂方法
 	 * @param type
 	 * @return
 	 */
