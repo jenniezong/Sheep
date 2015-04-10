@@ -23,7 +23,7 @@ public class FileTest {
 		file.createNewFile();
 	    }
 	    FileWriter fw = new FileWriter(file);
-	    fw.write("a,b,c\\n e,f,g");
+	    fw.write("a,b,c/\n e,f,g");
 	    fw.flush();
 	    fw.close();
 //	    BufferedOutputStream bos = new BufferedOutputStream(fw);
