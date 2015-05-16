@@ -11,13 +11,16 @@ public class BubbleSort {
 		int len = a.length;
 		boolean isOk = false;
 		System.out.println("\nSorting    *******************");
-		for (int j = 0; j < len - 1 && !isOk; j++) {
+		for (int j = 0; j < len-1
+			
+			
+			&& !isOk; j++) {
 			
 			isOk = true;
-			for (int i = len - 1; i > j; i--) {
+			for (int i = 0; i < len-j-1 ; i++) {
 
-				if (a[i] < a[i - 1]) {
-					UtilSort.swapData(a, i, i-1);
+				if (a[i] > a[i +1]) {
+					UtilSort.swapData(a, i, i+1);
 					isOk = false;
 				}
 			}
