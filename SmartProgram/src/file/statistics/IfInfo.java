@@ -10,12 +10,15 @@ public class IfInfo {
     private List<IfInfo> children;
     private int depth;
     private int braceCount;
-    private boolean isNew;
+    private boolean hasBrace;
+    private boolean isElse;
+    private boolean isElseIf;
 
-    public IfInfo(int x, int y) {
+    public IfInfo(int x, int y, boolean isElse) {
 	this.x = x;
 	this.y = y;
-	isNew = true;
+	this.isElse = isElse;
+	hasBrace = true;
 	children = new ArrayList<IfInfo>();
     }
 
@@ -53,12 +56,12 @@ public class IfInfo {
 	this.braceCount = braceCount;
     }
 
-    public boolean isNew() {
-	return isNew;
+    public boolean hasBrace() {
+	return hasBrace;
     }
 
-    public void setNew(boolean isNew) {
-	this.isNew = isNew;
+    public void setHasBrace(boolean isNew) {
+	this.hasBrace = isNew;
     }
 
     public int getDepth() {
@@ -68,8 +71,24 @@ public class IfInfo {
     public void setDepth(int depth) {
         this.depth = depth;
     }
+    
+    public boolean isElse() {
+		return isElse;
+	}
 
-    public String toString() {
+	public void setElse(boolean isElse) {
+		this.isElse = isElse;
+	}
+
+	public boolean isElseIf() {
+		return isElseIf;
+	}
+
+	public void setElseIf(boolean isElseIf) {
+		this.isElseIf = isElseIf;
+	}
+
+	public String toString() {
 	String result = "";
 	result = "(" + this.x + ", " + this.y + ")";
 	return result;

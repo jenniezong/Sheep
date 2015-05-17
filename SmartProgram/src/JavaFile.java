@@ -1,5 +1,3 @@
-package file.statistics;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -69,13 +67,14 @@ public class JavaFile {
 	}
 
 	/**
-	 * Find the if key in one line and save the if info into ifList.
-	 * There is a stack which is used for save the unclosed if statement. 
-	 * It's used to compute the if's depth.
-	 * When find the if key, it need to consider some special case, for example
-	 * the if string is in comment block or is the part of one string value.
+	 * Find the if key in one line and save the if info into ifList. There is a
+	 * stack which is used for save the unclosed if statement. It's used to
+	 * compute the if's depth. When find the if key, it need to consider some
+	 * special case, for example the if string is in comment block or is the
+	 * part of one string value.
 	 * 
-	 * @param line specified line
+	 * @param line
+	 *            specified line
 	 */
 	private void findIfInfoInOneLine(String line) {
 		char[] charArray = line.toCharArray();
@@ -174,18 +173,17 @@ public class JavaFile {
 		while (ifStack.size() > 0) {
 			IfInfo info = ifStack.peek();
 			if (info.getBraceCount() == 0) {
-				if(ifStack.peek().isElse()) {
+				if (ifStack.peek().isElse()) {
 					ifStack.pop();
-				}else {
+				} else {
 					ifList.add(ifStack.pop());
 				}
-				
+
 			} else {
 				break;
 			}
 		}
 	}
-
 
 	public static boolean isBlockComment(char[] charArray, int i) {
 		boolean result = false;
@@ -194,7 +192,6 @@ public class JavaFile {
 		return result;
 	}
 
-	
 	public static boolean isToggleComment(char[] charArray, int i) {
 		boolean result = false;
 		result = (charArray[i] == '/' && i + 1 <= charArray.length - 1 && charArray[i + 1] == '/');
@@ -242,7 +239,8 @@ public class JavaFile {
 			if (isContainIf(charArray, j)) {
 				index = columnIndex + 1;
 			}
-		} else if (i == 0 || charArray[i-1] == ';' || charArray[i - 1] == '{' || charArray[i - 1] == '}') {
+		} else if (i == 0 || charArray[i - 1] == ';' || charArray[i - 1] == '{'
+				|| charArray[i - 1] == '}') {
 			j = i;
 			if (isContainIf(charArray, j)) {
 				index = columnIndex;
@@ -262,14 +260,16 @@ public class JavaFile {
 	 */
 	private int columnIndexOfElseKey(char[] charArray, int i) {
 		int index = -1;
-		int j = 0;if(true) {}
+		int j = 0;
+		if (true) {
+		}
 
-		if (charArray[i] == ' ' ||  charArray[i] == '\t') {
+		if (charArray[i] == ' ' || charArray[i] == '\t') {
 			j = i + 1;
 			if (isContainElse(charArray, j)) {
 				index = columnIndex + 1;
 			}
-		} else if (i == 0 || charArray[i-1] == '}') {
+		} else if (i == 0 || charArray[i - 1] == '}') {
 			j = i;
 			if (isContainElse(charArray, j)) {
 				index = columnIndex;
@@ -278,7 +278,6 @@ public class JavaFile {
 		return index;
 	}
 
-	
 	public static boolean isContainIf(char[] charArray, int i) {
 		boolean result = false;
 		if (i + 1 <= charArray.length - 1
@@ -313,11 +312,11 @@ public class JavaFile {
 			if (ifStack.peek().isElse()) {
 				ifStack.pop();
 				ifInfo.setElseIf(true);
-				if(ifList.get(ifList.size()-1).hasBrace()) {
-					ifList.get(ifList.size()-1).addChildren(ifInfo);
-					ifInfo.setDepth(ifList.get(ifList.size()-1).getDepth() + 1);
+				if (ifList.get(ifList.size() - 1).hasBrace()) {
+					ifList.get(ifList.size() - 1).addChildren(ifInfo);
+					ifInfo.setDepth(ifList.get(ifList.size() - 1).getDepth() + 1);
 				} else {
-					ifInfo.setDepth(ifList.get(ifList.size()-1).getDepth());
+					ifInfo.setDepth(ifList.get(ifList.size() - 1).getDepth());
 				}
 			} else {
 				ifStack.peek().addChildren(ifInfo);
@@ -377,22 +376,23 @@ public class JavaFile {
 		return sb.toString();
 	}
 
-	public String getNestedIfInfos () {
+	public String getNestedIfInfos() {
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
 		for (IfInfo ifInfo : ifList) {
-			if(ifInfo.getDepth() > 0) {
+			if (ifInfo.getDepth() > 0) {
 				count++;
 				sb.append("[position:");
 				sb.append(ifInfo.toString());
 				sb.append(" depth:");
 				sb.append(ifInfo.getDepth() + "]\n");
 			}
-			
+
 		}
 		sb.append("Nested if number:" + count);
 		return sb.toString();
 	}
+
 	public String ifInfosAndFileName() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name + ":");
