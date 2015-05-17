@@ -19,6 +19,8 @@ public class JavaFile {
 
     private int colIndex = 0;
 
+    private boolean commentFlag = false;
+
     private Stack<IfInfo> ifStack = new Stack<IfInfo>();
 
     public JavaFile(String name) {
@@ -34,14 +36,14 @@ public class JavaFile {
 	File file = new File(name);
 	String line;
 	BufferedReader bf = null;
-	boolean commentFlag = false;
+
 	try {
 	    bf = new BufferedReader(new FileReader(file));
 
 	    while ((line = bf.readLine()) != null) {
 
 		rowIndex++;
-		parseIfInfoForOneLine(line,commentFlag);
+		parseIfInfoForOneLine(line);
 
 	    }
 
@@ -52,6 +54,7 @@ public class JavaFile {
 	} catch (IOException e) {
 
 	    e.printStackTrace();
+
 	} finally {
 	    try {
 		bf.close();
@@ -63,11 +66,11 @@ public class JavaFile {
 
     }
 
-    public void parseIfInfoForOneLine(String line, boolean commentFlag) {
+    public void parseIfInfoForOneLine(String line) {
 	char[] charArray = line.toCharArray();
 	boolean stringFlag = false;
-	
-	if (isEmptyOrCommentLine(line,commentFlag)) {
+
+	if (isEmptyOrCommentLine(line)) {
 	    return;
 	}
 	for (int i = 0, colIndex = 0; i < charArray.length; i++) {
@@ -82,7 +85,6 @@ public class JavaFile {
 		if (ifStack.size() > 0) {
 		    IfInfo info = ifStack.peek();
 		    info.setBraceCount(info.getBraceCount() + 1);
-		    info.setNew(false);
 		}
 
 	    } else if (!stringFlag && !commentFlag
@@ -91,11 +93,11 @@ public class JavaFile {
 		if (ifStack.size() > 0) {
 		    IfInfo info = ifStack.peek();
 		    info.setBraceCount(info.getBraceCount() - 1);
-		    if (!info.isNew() && info.getBraceCount() == 0) {
-			ifList.add(ifStack.pop());
-		    }
 		}
+		popTheClosedIf();
 
+	    } else if (!stringFlag && !commentFlag && charArray[i] == ';') {
+		popTheClosedIf();
 	    } else if (!stringFlag && isSingleComment(charArray, i)) {
 
 		break;
@@ -118,6 +120,17 @@ public class JavaFile {
 		    IfInfo ifInfo = new IfInfo(rowIndex, index);
 		    addToStack(ifInfo);
 		}
+	    }
+	}
+    }
+
+    private void popTheClosedIf() {
+	while (ifStack.size() > 0) {
+	    IfInfo info = ifStack.peek();
+	    if (info.getBraceCount() == 0) {
+		ifList.add(ifStack.pop());
+	    }else {
+		break;
 	    }
 	}
     }
@@ -236,11 +249,16 @@ public class JavaFile {
 	ifStack.push(ifInfo);
     }
 
-    public static boolean isEmptyOrCommentLine(String line, boolean isCommentFlag) {
+    public boolean isEmptyOrCommentLine(String line) {
 	boolean result = false;
 
 	if (line.trim().equals("") || line.trim().startsWith("//")
-		|| line.trim().startsWith("/*") || line.trim().startsWith("*") || isCommentFlag) {
+		|| line.trim().startsWith("/*") || line.trim().startsWith("*")
+		|| line.trim().endsWith("*/") || commentFlag) {
+
+	    if (line.trim().startsWith("/*") || line.trim().endsWith("*/")) {
+		commentFlag = !commentFlag;
+	    }
 	    result = true;
 	}
 	return result;
