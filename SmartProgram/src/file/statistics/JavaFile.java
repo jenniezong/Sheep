@@ -1,5 +1,4 @@
 package file.statistics;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,13 +20,7 @@ public class JavaFile {
 
 	private int columnIndex = 0;
 
-<<<<<<< HEAD
 	private boolean commentFlag = false;
-=======
-    private boolean commentFlag = false;
-
-    private Stack<IfInfo> ifStack = new Stack<IfInfo>();
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 	private Stack<IfInfo> ifStack = new Stack<IfInfo>();
 
@@ -54,25 +47,11 @@ public class JavaFile {
 			}
 			sortIfInfoList();
 
-<<<<<<< HEAD
 		} catch (FileNotFoundException e) {
-=======
-	File file = new File(name);
-	String line;
-	BufferedReader bf = null;
-
-	try {
-	    bf = new BufferedReader(new FileReader(file));
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 			e.printStackTrace();
 
-<<<<<<< HEAD
 		} catch (IOException e) {
-=======
-		rowIndex++;
-		parseIfInfoForOneLine(line);
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 			e.printStackTrace();
 
@@ -86,28 +65,17 @@ public class JavaFile {
 			}
 		}
 
-<<<<<<< HEAD
-=======
-	    e.printStackTrace();
-
-	} finally {
-	    try {
-		bf.close();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 	}
 
 	/**
-	 * Find the if key in one line and save the if info into ifList.
-	 * There is a stack which is used for save the unclosed if statement. 
-	 * It's used to compute the if's depth.
-	 * When find the if key, it need to consider some special case, for example
-	 * the if string is in comment block or is the part of one string value.
+	 * Find the if key in one line and save the if info into ifList. There is a
+	 * stack which is used for save the unclosed if statement. It's used to
+	 * compute the if's depth. When find the if key, it need to consider some
+	 * special case, for example the if string is in comment block or is the
+	 * part of one string value.
 	 * 
-	 * @param line specified line
+	 * @param line
+	 *            specified line
 	 */
 	private void findIfInfoInOneLine(String line) {
 		char[] charArray = line.toCharArray();
@@ -156,16 +124,7 @@ public class JavaFile {
 				continue;
 			}
 
-<<<<<<< HEAD
 		}
-=======
-    public void parseIfInfoForOneLine(String line) {
-	char[] charArray = line.toCharArray();
-	boolean stringFlag = false;
-
-	if (isEmptyOrCommentLine(line)) {
-	    return;
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 	}
 
 	private boolean addToStackIfNeed(char[] charArray, int i) {
@@ -190,19 +149,13 @@ public class JavaFile {
 
 	private void decreaseBraceCountIfNeed() {
 		if (ifStack.size() > 0) {
-<<<<<<< HEAD
 			IfInfo info = ifStack.peek();
 			info.setBraceCount(info.getBraceCount() - 1);
-=======
-		    IfInfo info = ifStack.peek();
-		    info.setBraceCount(info.getBraceCount() + 1);
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 		}
 	}
 
 	private void increaseBraceCountIfNeed() {
 		if (ifStack.size() > 0) {
-<<<<<<< HEAD
 			IfInfo info = ifStack.peek();
 			info.setBraceCount(info.getBraceCount() + 1);
 			info.setHasBrace(false);
@@ -216,33 +169,22 @@ public class JavaFile {
 			columnIndex++;
 		}
 	}
-=======
-		    IfInfo info = ifStack.peek();
-		    info.setBraceCount(info.getBraceCount() - 1);
-		}
-		popTheClosedIf();
-
-	    } else if (!stringFlag && !commentFlag && charArray[i] == ';') {
-		popTheClosedIf();
-	    } else if (!stringFlag && isSingleComment(charArray, i)) {
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 	private void popTheClosedIf() {
 		while (ifStack.size() > 0) {
 			IfInfo info = ifStack.peek();
 			if (info.getBraceCount() == 0) {
-				if(ifStack.peek().isElse()) {
+				if (ifStack.peek().isElse()) {
 					ifStack.pop();
-				}else {
+				} else {
 					ifList.add(ifStack.pop());
 				}
-				
+
 			} else {
 				break;
 			}
 		}
 	}
-
 
 	public static boolean isBlockComment(char[] charArray, int i) {
 		boolean result = false;
@@ -251,7 +193,6 @@ public class JavaFile {
 		return result;
 	}
 
-	
 	public static boolean isToggleComment(char[] charArray, int i) {
 		boolean result = false;
 		result = (charArray[i] == '/' && i + 1 <= charArray.length - 1 && charArray[i + 1] == '/');
@@ -272,25 +213,10 @@ public class JavaFile {
 
 	}
 
-<<<<<<< HEAD
 	public static boolean isSingleQuotes(char[] charArray, int i) {
 		boolean result = false;
 
 		result = (charArray[i] == '\'' && (charArray[i - 1] != '\\'));
-=======
-    private void popTheClosedIf() {
-	while (ifStack.size() > 0) {
-	    IfInfo info = ifStack.peek();
-	    if (info.getBraceCount() == 0) {
-		ifList.add(ifStack.pop());
-	    }else {
-		break;
-	    }
-	}
-    }
-
-    public static boolean isValidLeftBrace(char[] charArray, int i) {
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 		return result;
 	}
@@ -314,7 +240,8 @@ public class JavaFile {
 			if (isContainIf(charArray, j)) {
 				index = columnIndex + 1;
 			}
-		} else if (i == 0 || charArray[i-1] == ';' || charArray[i - 1] == '{' || charArray[i - 1] == '}') {
+		} else if (i == 0 || charArray[i - 1] == ';' || charArray[i - 1] == '{'
+				|| charArray[i - 1] == '}') {
 			j = i;
 			if (isContainIf(charArray, j)) {
 				index = columnIndex;
@@ -334,14 +261,16 @@ public class JavaFile {
 	 */
 	private int columnIndexOfElseKey(char[] charArray, int i) {
 		int index = -1;
-		int j = 0;if(true) {}
+		int j = 0;
+		if (true) {
+		}
 
-		if (charArray[i] == ' ' ||  charArray[i] == '\t') {
+		if (charArray[i] == ' ' || charArray[i] == '\t') {
 			j = i + 1;
 			if (isContainElse(charArray, j)) {
 				index = columnIndex + 1;
 			}
-		} else if (i == 0 || charArray[i-1] == '}') {
+		} else if (i == 0 || charArray[i - 1] == '}') {
 			j = i;
 			if (isContainElse(charArray, j)) {
 				index = columnIndex;
@@ -350,7 +279,6 @@ public class JavaFile {
 		return index;
 	}
 
-	
 	public static boolean isContainIf(char[] charArray, int i) {
 		boolean result = false;
 		if (i + 1 <= charArray.length - 1
@@ -385,11 +313,11 @@ public class JavaFile {
 			if (ifStack.peek().isElse()) {
 				ifStack.pop();
 				ifInfo.setElseIf(true);
-				if(ifList.get(ifList.size()-1).hasBrace()) {
-					ifList.get(ifList.size()-1).addChildren(ifInfo);
-					ifInfo.setDepth(ifList.get(ifList.size()-1).getDepth() + 1);
+				if (ifList.get(ifList.size() - 1).hasBrace()) {
+					ifList.get(ifList.size() - 1).addChildren(ifInfo);
+					ifInfo.setDepth(ifList.get(ifList.size() - 1).getDepth() + 1);
 				} else {
-					ifInfo.setDepth(ifList.get(ifList.size()-1).getDepth());
+					ifInfo.setDepth(ifList.get(ifList.size() - 1).getDepth());
 				}
 			} else {
 				ifStack.peek().addChildren(ifInfo);
@@ -435,7 +363,6 @@ public class JavaFile {
 		return sb.toString();
 	}
 
-<<<<<<< HEAD
 	public String getFullIfInfos() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("totally:");
@@ -450,40 +377,28 @@ public class JavaFile {
 		return sb.toString();
 	}
 
-	public String getNestedIfInfos () {
+	public String getNestedIfInfos() {
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
 		for (IfInfo ifInfo : ifList) {
-			if(ifInfo.getDepth() > 0) {
+			if (ifInfo.getDepth() > 0) {
 				count++;
 				sb.append("[position:");
 				sb.append(ifInfo.toString());
 				sb.append(" depth:");
 				sb.append(ifInfo.getDepth() + "]\n");
 			}
-			
+
 		}
 		sb.append("Nested if number:" + count);
 		return sb.toString();
 	}
+
 	public String ifInfosAndFileName() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name + ":");
 		sb.append(getSimpleIfInfos() + "\n");
 		return sb.toString();
-=======
-    public boolean isEmptyOrCommentLine(String line) {
-	boolean result = false;
-
-	if (line.trim().equals("") || line.trim().startsWith("//")
-		|| line.trim().startsWith("/*") || line.trim().startsWith("*")
-		|| line.trim().endsWith("*/") || commentFlag) {
-
-	    if (line.trim().startsWith("/*") || line.trim().endsWith("*/")) {
-		commentFlag = !commentFlag;
-	    }
-	    result = true;
->>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 	}
 
 	public String getName() {

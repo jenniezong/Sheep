@@ -1,3 +1,4 @@
+package file.statistics;
 public class JavaFileMainTest {
 
 	public static void main(String[] args) {
