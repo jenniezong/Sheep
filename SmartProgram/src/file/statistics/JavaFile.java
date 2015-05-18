@@ -21,7 +21,13 @@ public class JavaFile {
 
 	private int columnIndex = 0;
 
+<<<<<<< HEAD
 	private boolean commentFlag = false;
+=======
+    private boolean commentFlag = false;
+
+    private Stack<IfInfo> ifStack = new Stack<IfInfo>();
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 	private Stack<IfInfo> ifStack = new Stack<IfInfo>();
 
@@ -48,11 +54,25 @@ public class JavaFile {
 			}
 			sortIfInfoList();
 
+<<<<<<< HEAD
 		} catch (FileNotFoundException e) {
+=======
+	File file = new File(name);
+	String line;
+	BufferedReader bf = null;
+
+	try {
+	    bf = new BufferedReader(new FileReader(file));
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 			e.printStackTrace();
 
+<<<<<<< HEAD
 		} catch (IOException e) {
+=======
+		rowIndex++;
+		parseIfInfoForOneLine(line);
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 			e.printStackTrace();
 
@@ -66,6 +86,18 @@ public class JavaFile {
 			}
 		}
 
+<<<<<<< HEAD
+=======
+	    e.printStackTrace();
+
+	} finally {
+	    try {
+		bf.close();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 	}
 
 	/**
@@ -124,7 +156,16 @@ public class JavaFile {
 				continue;
 			}
 
+<<<<<<< HEAD
 		}
+=======
+    public void parseIfInfoForOneLine(String line) {
+	char[] charArray = line.toCharArray();
+	boolean stringFlag = false;
+
+	if (isEmptyOrCommentLine(line)) {
+	    return;
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 	}
 
 	private boolean addToStackIfNeed(char[] charArray, int i) {
@@ -149,13 +190,19 @@ public class JavaFile {
 
 	private void decreaseBraceCountIfNeed() {
 		if (ifStack.size() > 0) {
+<<<<<<< HEAD
 			IfInfo info = ifStack.peek();
 			info.setBraceCount(info.getBraceCount() - 1);
+=======
+		    IfInfo info = ifStack.peek();
+		    info.setBraceCount(info.getBraceCount() + 1);
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 		}
 	}
 
 	private void increaseBraceCountIfNeed() {
 		if (ifStack.size() > 0) {
+<<<<<<< HEAD
 			IfInfo info = ifStack.peek();
 			info.setBraceCount(info.getBraceCount() + 1);
 			info.setHasBrace(false);
@@ -169,6 +216,16 @@ public class JavaFile {
 			columnIndex++;
 		}
 	}
+=======
+		    IfInfo info = ifStack.peek();
+		    info.setBraceCount(info.getBraceCount() - 1);
+		}
+		popTheClosedIf();
+
+	    } else if (!stringFlag && !commentFlag && charArray[i] == ';') {
+		popTheClosedIf();
+	    } else if (!stringFlag && isSingleComment(charArray, i)) {
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 	private void popTheClosedIf() {
 		while (ifStack.size() > 0) {
@@ -215,10 +272,25 @@ public class JavaFile {
 
 	}
 
+<<<<<<< HEAD
 	public static boolean isSingleQuotes(char[] charArray, int i) {
 		boolean result = false;
 
 		result = (charArray[i] == '\'' && (charArray[i - 1] != '\\'));
+=======
+    private void popTheClosedIf() {
+	while (ifStack.size() > 0) {
+	    IfInfo info = ifStack.peek();
+	    if (info.getBraceCount() == 0) {
+		ifList.add(ifStack.pop());
+	    }else {
+		break;
+	    }
+	}
+    }
+
+    public static boolean isValidLeftBrace(char[] charArray, int i) {
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
 		return result;
 	}
@@ -363,6 +435,7 @@ public class JavaFile {
 		return sb.toString();
 	}
 
+<<<<<<< HEAD
 	public String getFullIfInfos() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("totally:");
@@ -398,6 +471,19 @@ public class JavaFile {
 		sb.append(name + ":");
 		sb.append(getSimpleIfInfos() + "\n");
 		return sb.toString();
+=======
+    public boolean isEmptyOrCommentLine(String line) {
+	boolean result = false;
+
+	if (line.trim().equals("") || line.trim().startsWith("//")
+		|| line.trim().startsWith("/*") || line.trim().startsWith("*")
+		|| line.trim().endsWith("*/") || commentFlag) {
+
+	    if (line.trim().startsWith("/*") || line.trim().endsWith("*/")) {
+		commentFlag = !commentFlag;
+	    }
+	    result = true;
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 	}
 
 	public String getName() {

@@ -137,6 +137,7 @@ public class CalculatorTest {
     @Test
     public void isEmptyOrCommentLine() {
 	// Tab key
+<<<<<<< HEAD
 //	assertEquals(true, javaFile.isEmptyOrCommentLine("		"));
 //	assertEquals(true, javaFile.isEmptyOrCommentLine(""));
 //	assertEquals(true, javaFile.isEmptyOrCommentLine(" "));
@@ -144,6 +145,15 @@ public class CalculatorTest {
 //	assertEquals(true, javaFile.isEmptyOrCommentLine(" /*comment"));
 //	assertEquals(true, javaFile.isEmptyOrCommentLine("* comment"));
 //	assertEquals(true, javaFile.isEmptyOrCommentLine("*/"));
+=======
+	assertEquals(true, javaFile.isEmptyOrCommentLine("		"));
+	assertEquals(true, javaFile.isEmptyOrCommentLine(""));
+	assertEquals(true, javaFile.isEmptyOrCommentLine(" "));
+	assertEquals(true, javaFile.isEmptyOrCommentLine("	/*comment"));
+	assertEquals(true, javaFile.isEmptyOrCommentLine(" /*comment"));
+	assertEquals(true, javaFile.isEmptyOrCommentLine("* comment"));
+	assertEquals(true, javaFile.isEmptyOrCommentLine("*/"));
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 //	
 //	assertEquals(false,
 //		javaFile.isEmptyOrCommentLine("boolean flag = false;"));
@@ -187,6 +197,7 @@ public class CalculatorTest {
 //		JavaFile.colIndexOfIfKey("int ifa = 0;".toCharArray(), 3, 4));
     }
 
+<<<<<<< HEAD
 //    @Test
 //    public void parseIfInfoForOneLine() {
 //	Stack<IfInfo> stack = new Stack<IfInfo>();
@@ -197,6 +208,18 @@ public class CalculatorTest {
 //
 //        
 //    }
+=======
+    @Test
+    public void parseIfInfoForOneLine() {
+	Stack<IfInfo> stack = new Stack<IfInfo>();
+	IfInfo ifInfo = new IfInfo(0, 9);
+	stack.push(ifInfo);
+	javaFile.parseIfInfoForOneLine(" } else if (!stringFlag && !commentFlag && c == '}') {");
+	assertEquals(ifInfo, javaFile.getIfStack().peek());
+
+        
+    }
+>>>>>>> 29358fd8f8e3be6e0b9d41f9560398b8452a1101
 
     @Test
     public void parseIfInfoForFile() {
