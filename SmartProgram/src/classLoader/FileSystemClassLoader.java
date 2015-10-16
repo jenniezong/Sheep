@@ -12,6 +12,7 @@ public class FileSystemClassLoader extends ClassLoader{
 	private String rootDir;
 	
 	public FileSystemClassLoader(String rootDir) {
+		super();
 		this.rootDir = rootDir;
 	}
 	
