@@ -9,11 +9,17 @@ public class RuntimeExceptionTest {
 		try {
 			if (true)
 				throw new RuntimeException("error");
+			System.out.println("try!!!");
+			return;
 		}catch (Exception e) {
 			System.out.println("error!!!");
+			System.exit(0);
+			return;
+		} finally {
+			System.out.println("Finally!!!");
 		}
 		
+		
 
-		System.out.println("Ending!!!");
 	}
 }
