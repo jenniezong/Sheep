@@ -50,7 +50,7 @@ public class Server {
                 System.out.print("请输入:\t");    
                 // 发送键盘输入的一行    
                 String s = new BufferedReader(new InputStreamReader(System.in)).readLine();    
-                out.writeUTF(s);    
+                out.writeUTF(clientInputStr+ "********************"+s);    
                   
                 out.close();    
                 input.close();    

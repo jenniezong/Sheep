@@ -1,4 +1,4 @@
-package classLoader;
+package jvm.classLoader;
 
 public class Test {
 
