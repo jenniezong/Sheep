@@ -1,6 +1,6 @@
 package basic;
 
-public class TestOverwrite {
+public class TestOverride {
 
 	public static void main(String[] args) {
 
