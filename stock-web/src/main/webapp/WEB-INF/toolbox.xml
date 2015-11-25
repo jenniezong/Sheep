@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+   <!--  <tool>
+        <key>stringUtil</key>
+        <scope>application</scope>
+        <class>com.jd.common.util.StringUtils</class>
+    </tool>
+     <tool>
+        <key>enumUtil</key>
+        <scope>application</scope>
+        <class>com.jd.jr.geious.common.utils.EnumUtil</class>
+    </tool>
+    <tool>
+	     <key>dictTool</key>
+	     <scope>application</scope>
+	     <class>com.jd.jr.geious.service.biz.common.DataDictTools</class>
+	</tool>
+    <tool>
+        <key>timeTool</key>
+        <scope>application</scope>
+        <class>com.jd.jr.geious.common.utils.TimeUtils</class>
+    </tool>
+    <tool>
+        <key>dataShowUtil</key>
+        <scope>application</scope>
+        <class>com.jd.jr.geious.common.utils.DataShowUtil</class>
+    </tool>
+    <tool>
+        <key>menusTools</key>
+        <scope>application</scope>
+        <class>com.jd.jr.geious.web.controller.common.MenusTools</class>
+    </tool>
+    <tool>
+        <key>currencyUtils</key>
+        <scope>application</scope>
+        <class>com.jd.jr.geious.common.utils.CurrencyUtils</class>
+    </tool>
+    <tool>
+        <key>numberUtils</key>
+        <scope>application</scope>
+        <class>com.jd.jr.geious.common.utils.NumberUtils</class>
+    </tool> -->
+</toolbox>

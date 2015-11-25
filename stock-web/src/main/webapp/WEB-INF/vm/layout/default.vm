@@ -1,0 +1,8 @@
+#if(${layout} == "true" )
+	#include("login.vm")
+	this is if
+#else
+	## #parse("main.vm")
+	#include("login.vm")
+	this is else
+#end

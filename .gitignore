@@ -3,3 +3,4 @@
 *webContent*
 *.class
 *bin*
+/target/
