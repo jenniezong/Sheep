@@ -4,3 +4,8 @@
 *.class
 *bin*
 /target/
+.metadata/
+RemoteSystemsTempFiles
+.classpath
+.project
+
