@@ -1,6 +1,7 @@
 package com.nan.netty.study.protocol;
 
 import java.util.List;
+
 import java.util.Map;
 
 import io.netty.buffer.ByteBuf;
@@ -40,7 +41,9 @@ public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMess
 		key = null;
 		keyArray = null;
 		value = null;
+		int bodyIdx = 0;
 		if(msg.getBody() != null){
+			bodyIdx = sendBuf.readableBytes();
 			marshallingEncoder.encode(ctx, msg.getBody(), sendBuf);
 		}
 			
@@ -48,6 +51,7 @@ public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMess
 		// 在第4个字节出写入Buffer的长度
 		int readableBytes = sendBuf.readableBytes();
 		sendBuf.setInt(4, readableBytes);
+		sendBuf.setInt(bodyIdx,readableBytes-bodyIdx);
 
 		// 把Message添加到List传递到下一个Handler
 
