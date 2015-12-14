@@ -1,5 +1,11 @@
 package com.nan.netty.study.protocol;
 
+import java.util.List;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.nan.netty.study.common.StockRealtime;
+
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -12,8 +18,15 @@ public class LoginAuthRespHandler extends ChannelHandlerAdapter {
 		if (message.getHeader() != null
 				&& message.getHeader().getType() == (byte) 1) {
 			System.out.println("Login is OK");
+//			String body = (String) message.getBody();
+//			System.out.println("Recevied message body from client is " + body);
 			String body = (String) message.getBody();
-			System.out.println("Recevied message body from client is " + body);
+			List<StockRealtime> list = JSON.parseArray(body,StockRealtime.class);
+			for (StockRealtime stockRealtime : list) {
+				String s = JSON.toJSONString(stockRealtime);
+				System.out.println("Recevied message body from client is " + s);
+			}
+//			System.out.println("Recevied message body from client is " + body);
 		}
 		ctx.writeAndFlush(buildLoginResponse((byte) 3));
 	}

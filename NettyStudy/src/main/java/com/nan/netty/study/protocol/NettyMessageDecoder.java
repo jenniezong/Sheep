@@ -1,11 +1,17 @@
 package com.nan.netty.study.protocol;
 
 import io.netty.buffer.ByteBuf;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.jboss.marshalling.Marshaller;
+import org.jboss.marshalling.MarshallerFactory;
+import org.jboss.marshalling.Marshalling;
+import org.jboss.marshalling.serial.SerialMarshallerFactory;
 
 public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
 	private NettyMarshallingDecoder marshallingDecoder;
@@ -31,8 +37,8 @@ public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
 		header.setSessionID(frame.readLong());
 		header.setType(frame.readByte());
 		header.setPriority(frame.readByte());
-
-		int size = frame.readInt();
+		byte size = frame.readByte();
+		
 		if (size > 0) {
 			Map<String, Object> attach = new HashMap<String, Object>(size);
 			int keySize = 0;
@@ -52,7 +58,10 @@ public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
 		if (frame.readableBytes() > 0) {
 //			byte[] dst = new byte[frame.readableBytes()];
 //			frame.readBytes(dst);
-			message.setBody(marshallingDecoder.decode(ctx, in));
+			int bodyLen = frame.readInt();
+			message.setBody(marshallingDecoder.decode(ctx, frame));
+//			marshaller.writeObject(obj);
+//			marshalling.get
 		}
 		message.setHeader(header);
 		return message;

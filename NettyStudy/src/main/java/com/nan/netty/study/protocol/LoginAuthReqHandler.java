@@ -1,5 +1,13 @@
 package com.nan.netty.study.protocol;
 
+import java.io.File;
+import java.util.List;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.nan.netty.study.common.Mktdt00TXT;
+import com.nan.netty.study.common.StockRealtime;
+
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -26,7 +34,12 @@ public class LoginAuthReqHandler extends ChannelHandlerAdapter {
 		Header header = new Header();
 		header.setType((byte) 1);
 		message.setHeader(header);
-		message.setBody("It is request");
+		Object[] objs = Mktdt00TXT.readTxtFile(new File("g:\\mktdt00.txt"));
+		List<StockRealtime> list = (List<StockRealtime>) objs[0];
+		System.out.println("size : "+list.size());
+		String body = JSON.toJSONString(list);
+		message.setBody(body);
+//		message.setBody("It is a request");
 		return message;
 	}
 

@@ -31,8 +31,8 @@ public class NettyClient {
 
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
-			// -8表示lengthAdjustment，让解码器从0开始截取字节，并且包含消息头
-			ch.pipeline().addLast(new NettyMessageDecoder(1048576, 4, 4, -8, 0))
+			
+			ch.pipeline().addLast(new NettyMessageDecoder(5*1024*1024, 4, 4, -8, 0))
 			.addLast(new NettyMessageEncoder())
 			.addLast(new LoginAuthReqHandler());
 		}
@@ -41,7 +41,7 @@ public class NettyClient {
 	
 	public static void main(String[] args){
 		try {
-			new NettyClient().connect("10.13.24.33", 12345);
+			new NettyClient().connect("10.13.24.31", 12345);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
