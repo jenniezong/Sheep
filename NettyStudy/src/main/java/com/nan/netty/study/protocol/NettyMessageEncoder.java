@@ -1,7 +1,6 @@
 package com.nan.netty.study.protocol;
 
 import java.util.List;
-
 import java.util.Map;
 
 import io.netty.buffer.ByteBuf;
@@ -45,18 +44,16 @@ public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMess
 		if(msg.getBody() != null){
 			bodyIdx = sendBuf.readableBytes();
 			sendBuf.writeInt(0);
-			marshallingEncoder.encode(ctx, msg.getBody(), sendBuf);
+			String body = (String) msg.getBody();
+			sendBuf.writeBytes(body.getBytes("UTF-8"));
+//			marshallingEncoder.encode(ctx, msg.getBody(), sendBuf);
 		}
 			
-		// sendBuf.writeInt(0);
-		
 		int readableBytes = sendBuf.readableBytes();
-		sendBuf.setInt(bodyIdx,readableBytes-bodyIdx);
+		sendBuf.setInt(bodyIdx,readableBytes-bodyIdx-4);
+		System.out.println("Body size : " + (readableBytes-bodyIdx));
 		readableBytes = sendBuf.readableBytes();
 		sendBuf.setInt(4, readableBytes);
-		
-
-		// ��Message��ӵ�List���ݵ���һ��Handler
 
 		out.add(sendBuf);
 	}

@@ -32,16 +32,18 @@ public class NettyClient {
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
 			
-			ch.pipeline().addLast(new NettyMessageDecoder(5*1024*1024, 4, 4, -8, 0))
+			ch.pipeline().addLast(new NettyMessageDecoder(6*1024*1024, 4, 4, -8, 0))
 			.addLast(new NettyMessageEncoder())
-			.addLast(new LoginAuthReqHandler());
+			.addLast(new LoginAuthReqHandler())
+//			.addLast(new HeartBeatReqHandler())
+			.addLast(new ReqMsgHandler());
 		}
 
 	}
 	
 	public static void main(String[] args){
 		try {
-			new NettyClient().connect("10.13.24.31", 12345);
+			new NettyClient().connect("10.13.24.49", 12345);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);

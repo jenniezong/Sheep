@@ -1,12 +1,13 @@
 package com.nan.netty.study.code;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.MessageToMessageDecoder;
+
 import java.util.List;
 
 import org.msgpack.MessagePack;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageDecoder;
 
 public class MsgpackDecoder extends MessageToMessageDecoder<ByteBuf>{
 
@@ -20,6 +21,7 @@ public class MsgpackDecoder extends MessageToMessageDecoder<ByteBuf>{
 		msg.getBytes(msg.readerIndex(), array,0,length);
 		MessagePack msgpack = new MessagePack();
 		out.add(msgpack.read(array));
+		
 	}
 
 }

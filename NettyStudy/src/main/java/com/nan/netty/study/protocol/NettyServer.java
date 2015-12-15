@@ -36,9 +36,11 @@ public class NettyServer {
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
 			ch.pipeline()
-					.addLast(new NettyMessageDecoder(5*1024*1024, 4, 4, -8, 0))
+					.addLast(new NettyMessageDecoder(6*1024*1024, 4, 4, -8, 0))
 					.addLast(new NettyMessageEncoder())
-					.addLast(new LoginAuthRespHandler());
+					.addLast(new LoginAuthRespHandler())
+					.addLast(new HeartBeatRespHandler())
+					.addLast(new RespMsgHandler());
 		}
 
 	}

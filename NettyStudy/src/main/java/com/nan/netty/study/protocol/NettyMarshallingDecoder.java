@@ -18,21 +18,6 @@ public class NettyMarshallingDecoder extends MarshallingDecoder{
 	}
 	
 	public Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
-//		int objectSize = in.readInt();
-//		Unmarshaller unmarshaller = provider.getUnmarshaller(ctx);
-//		ByteBuf buf = in.slice(in.readerIndex(), objectSize);
-//        ByteInput input = new ChannelBufferByteInput(buf);
-//
-//        try {
-//            unmarshaller.start(input);
-//            Object obj = unmarshaller.readObject();
-//            unmarshaller.finish();
-//            return obj;
-//        } finally {
-//            // Call close in a finally block as the ReplayingDecoder will throw an Error if not enough bytes are
-//            // readable. This helps to be sure that we do not leak resource
-//            unmarshaller.close();
-//        }
 		return super.decode(ctx, in);
 	}
 }

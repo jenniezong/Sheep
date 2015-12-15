@@ -26,6 +26,7 @@ public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
 	public Object decode(ChannelHandlerContext ctx, ByteBuf in)
 			throws Exception {
 		ByteBuf frame = (ByteBuf) super.decode(ctx, in);
+//		System.out.println(new String(frame.array(),"UTF-8"));
 		if (frame == null) {
 			return null;
 		}
@@ -59,7 +60,9 @@ public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
 //			byte[] dst = new byte[frame.readableBytes()];
 //			frame.readBytes(dst);
 			int bodyLen = frame.readInt();
-			message.setBody(marshallingDecoder.decode(ctx, frame));
+			byte[] bs = new byte[bodyLen];
+			message.setBody(new String(frame.readBytes(bodyLen).array(), "UTF-8"));
+//			message.setBody(marshallingDecoder.decode(ctx, frame));
 //			marshaller.writeObject(obj);
 //			marshalling.get
 		}

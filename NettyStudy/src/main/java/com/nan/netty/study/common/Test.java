@@ -8,6 +8,7 @@ public class Test {
 
 		File file = new File("g:\\mktdt00.txt");
 		Object[] objects = Mktdt00TXT.readTxtFile(file);
+		System.out.println("HELLO");
 		
 	}
 

@@ -13,28 +13,21 @@ public class LoginAuthRespHandler extends ChannelHandlerAdapter {
 	
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
-		System.out.println("LoginAuthRespHandler->channelRead");
 		NettyMessage message = (NettyMessage) msg;
 		if (message.getHeader() != null
-				&& message.getHeader().getType() == (byte) 1) {
+				&& message.getHeader().getType() == MessageType.LOGREQ.value()) {
 			System.out.println("Login is OK");
-//			String body = (String) message.getBody();
-//			System.out.println("Recevied message body from client is " + body);
-			String body = (String) message.getBody();
-			List<StockRealtime> list = JSON.parseArray(body,StockRealtime.class);
-			for (StockRealtime stockRealtime : list) {
-				String s = JSON.toJSONString(stockRealtime);
-				System.out.println("Recevied message body from client is " + s);
-			}
-//			System.out.println("Recevied message body from client is " + body);
+//			}
+			ctx.writeAndFlush(buildLoginResponse("Received the login message!"));
+		}else {
+			ctx.fireChannelRead(msg);
 		}
-		ctx.writeAndFlush(buildLoginResponse((byte) 3));
 	}
 
-	private NettyMessage buildLoginResponse(byte result) {
+	private NettyMessage buildLoginResponse(String result) {
 		NettyMessage message = new NettyMessage();
 		Header header = new Header();
-		header.setType((byte) 2);
+		header.setType(MessageType.LOGRESP.value());
 		message.setHeader(header);
 		message.setBody(result);
 		return message;
