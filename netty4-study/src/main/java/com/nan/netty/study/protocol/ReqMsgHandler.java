@@ -11,10 +11,13 @@ import com.nan.netty.study.common.StockRealtime;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
 
-public class ReqMsgHandler extends ChannelHandlerAdapter {
+public class ReqMsgHandler extends ChannelInboundHandlerAdapter {
 
+	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
@@ -37,7 +40,7 @@ public class ReqMsgHandler extends ChannelHandlerAdapter {
 		
 		List<StockRealtime> list = Lists.newLinkedList();
 		
-		for (int i =0; i < 8;i++) {
+		for (int i =0; i < 1;i++) {
 			Object[] objs = Mktdt00TXT.readTxtFile(new File("g:\\mktdt00.txt"));
 			list.addAll((List<StockRealtime>) objs[0]);
 		}
