@@ -19,7 +19,7 @@ public class Server {
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(acceptorGroup, IOGroup).channel(NioServerSocketChannel.class)
 				.option(ChannelOption.SO_BACKLOG, 100)
-				.handler(new ServerHandler())
+//				.handler(new ServerHandler())
 				.childHandler(new ChannelInitializer<SocketChannel>() {
 
 					@Override
