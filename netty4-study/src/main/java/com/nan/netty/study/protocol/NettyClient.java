@@ -1,5 +1,7 @@
 package com.nan.netty.study.protocol;
 
+import java.net.InetAddress;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -43,7 +45,7 @@ public class NettyClient {
 	
 	public static void main(String[] args){
 		try {
-			new NettyClient().connect("10.13.24.157", 12345);
+			new NettyClient().connect(InetAddress.getLocalHost().getHostAddress(), 12345);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);

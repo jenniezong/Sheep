@@ -1,5 +1,7 @@
 package com.nan.netty.study.helloworld;
 
+import java.net.InetAddress;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -36,6 +38,7 @@ public class HelloClient {
  
     public static void main(String[] args) throws Exception {
         HelloClient client = new HelloClient();
-        client.connect("10.13.24.157", 12345);
+        System.out.println(InetAddress.getLocalHost().getHostAddress());
+        client.connect(InetAddress.getLocalHost().getHostAddress(), 12345);
     }
 }
