@@ -1,5 +1,8 @@
 package com.nan.netty.study.codeC.msgPack;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -59,8 +62,14 @@ public class Client {
 	}
 
 	public static void main(String[] args) {
-		Client client = new Client("10.13.24.157", 12345);
+		Client client;
+		try {
+			client = new Client(InetAddress.getLocalHost().getHostAddress(), 12345);
+			client.run();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// new Client("10.13.24.31", 12345);
-		client.run();
 	}
 }
