@@ -8,7 +8,8 @@ public enum MessageType {
 		LOGREQ((byte)3),
 		LOGRESP((byte)4),
 		HEARTREQ((byte)5),
-		HEARTRESP((byte)6);
+		HEARTRESP((byte)6),
+		PUBLISH((byte)7);
 		
 		private byte value;
 		

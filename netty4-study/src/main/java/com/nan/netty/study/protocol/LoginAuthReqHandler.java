@@ -2,6 +2,7 @@ package com.nan.netty.study.protocol;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.timeout.IdleState;
 
 public class LoginAuthReqHandler extends ChannelInboundHandlerAdapter {
 	
@@ -9,6 +10,7 @@ public class LoginAuthReqHandler extends ChannelInboundHandlerAdapter {
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 //		System.out.println("LoginAuthReqHandler->channelActive");
 		ctx.writeAndFlush(buildLoginReq());
+		ctx.fireChannelActive();
 	} 
 
 	@Override

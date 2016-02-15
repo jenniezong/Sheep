@@ -11,6 +11,12 @@ public class HeartBeatReqHandler extends ChannelInboundHandlerAdapter{
 	
 	private volatile ScheduledFuture<?> heartBeatFuture;
 
+	
+	
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		System.out.println("heart beat actived!");
+		
+	};
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {

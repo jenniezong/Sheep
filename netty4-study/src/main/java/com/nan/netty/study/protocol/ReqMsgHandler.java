@@ -29,6 +29,8 @@ public class ReqMsgHandler extends ChannelInboundHandlerAdapter {
 		}else if (message.getHeader() != null
 				&& message.getHeader().getType() == MessageType.RESPONSE.value()) {
 			System.out.println("ReqMsgHandler->write() response time :" + System.currentTimeMillis());
+		} else {
+			ctx.fireChannelRead(msg);
 		}
 	}
 
